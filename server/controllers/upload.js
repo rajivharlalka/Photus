@@ -14,13 +14,13 @@ router.post("/", async (req, res) => {
     const { data } = await supabase.storage
       .from("photos")
       .upload(pt, file.data, {
-        cacheControl: 100,
+        cacheControl: 0,
         contentType: file.mimetype,
       });
-    const { signedURL } = await supabase.storage
+    const { publicURL } = await supabase.storage
       .from("photos")
-      .createSignedUrl(pt, 86400);
-    res.send({ url: signedURL });
+      .getPublicUrl(pt);
+    res.send({ url: publicURL });
   } catch (err) {
     console.log(err);
     res.statusCode(400).json({ error: err });
