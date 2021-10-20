@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Button } from "@mui/material";
 import { useState } from "react";
@@ -14,7 +13,6 @@ function App() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const fd = new FormData();
     fd.append("file", uploadFile);
     console.log(fd);
