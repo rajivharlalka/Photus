@@ -3,6 +3,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 
 function App() {
+  const [response, setResponse] = useState(undefined);
   const [uploadFile, setUploadFile] = useState(null);
   const [isUploaded, setIsUploaded] = useState(false);
   const handleUpload = (e) => {
@@ -15,13 +16,12 @@ function App() {
     e.preventDefault();
     const fd = new FormData();
     fd.append("file", uploadFile);
-    console.log(fd);
-    fetch("http://localhost:4000/upload", {
+    const response = await fetch("http://localhost:4000/upload", {
       method: "POST",
       body: fd,
-    })
-      .then((res) => res.json())
-      .then(console.log);
+    });
+    const url = await response.json();
+    setResponse(url.url);
   };
   return (
     <div className="App">
@@ -31,6 +31,7 @@ function App() {
           <input type="submit" value="submit" onClick={handleSubmit} />
         ) : null}
       </form>
+      {response ? <img src={response}></img> : null}
     </div>
   );
 }
