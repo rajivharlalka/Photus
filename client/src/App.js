@@ -31,7 +31,7 @@ function App() {
           <input type="submit" value="submit" onClick={handleSubmit} />
         ) : null}
       </form>
-      {response ? <img src={response}></img> : null}
+      {response ? <img src={response} /> : null}
     </div>
   );
 }

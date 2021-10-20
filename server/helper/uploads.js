@@ -5,7 +5,6 @@ const supabase = createClient(config.SUPABASE_URL, config.ANON_KEY);
 
 function storageUpload(buffer, mimetype, path) {
   const { data } = supabase.storage.from("photos").upload(path, buffer, {
-    cacheControl: 0,
     contentType: mimetype,
   });
   return data;

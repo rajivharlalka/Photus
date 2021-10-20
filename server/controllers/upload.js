@@ -6,13 +6,11 @@ const { storageUpload, getUrl } = require("../helper/uploads");
 router.post("/", async (req, res) => {
   try {
     const file = req.files.file;
-    const path = "public/" + file.name;
-
     file.name = createFileName(file.name);
-
+    const path = "public/" + file.name;
     storageUpload(file.data, file.mimetype, path);
     const publicURL = getUrl(path);
-
+    
     const code = updateTable(publicURL);
     res.send({ url: publicURL });
   } catch (err) {
