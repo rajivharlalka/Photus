@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { updateTable } = require("../helper/db");
 const { createFileName } = require("../helper/fileName");
 const { storageUpload, getUrl } = require("../helper/uploads");
 
@@ -11,9 +12,10 @@ router.post("/", async (req, res) => {
 
     storageUpload(file.data, file.mimetype, path);
     const publicURL = getUrl(path);
+
+    const code = updateTable(publicURL);
     res.send({ url: publicURL });
-  } 
-  catch (err) {
+  } catch (err) {
     console.log(err);
     res.statusCode(400).json({ error: err });
   }
