@@ -1,27 +1,19 @@
 const router = require("express").Router();
-const config = require("../utils/config");
-const { createClient } = require("@supabase/supabase-js");
 const { createFileName } = require("../helper/fileName");
-
-const supabase = createClient(config.SUPABASE_URL, config.ANON_KEY);
+const { storageUpload, getUrl } = require("../helper/uploads");
 
 router.post("/", async (req, res) => {
   try {
     const file = req.files.file;
+    const path = "public/" + file.name;
+
     file.name = createFileName(file.name);
-    console.log(file.name);
-    const pt = "public/" + file.name;
-    const { data } = await supabase.storage
-      .from("photos")
-      .upload(pt, file.data, {
-        cacheControl: 0,
-        contentType: file.mimetype,
-      });
-    const { publicURL } = await supabase.storage
-      .from("photos")
-      .getPublicUrl(pt);
+
+    storageUpload(file.data, file.mimetype, path);
+    const publicURL = getUrl(path);
     res.send({ url: publicURL });
-  } catch (err) {
+  } 
+  catch (err) {
     console.log(err);
     res.statusCode(400).json({ error: err });
   }
