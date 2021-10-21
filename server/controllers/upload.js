@@ -1,18 +1,16 @@
 const router = require("express").Router();
 const { updateTable } = require("../helper/db");
 const { createFileName } = require("../helper/fileName");
-const { storageUpload, getUrl } = require("../helper/uploads");
+const { storageUpload } = require("../helper/supabase");
 
 router.post("/", async (req, res) => {
   try {
     const file = req.files.file;
     file.name = createFileName(file.name);
     const path = "public/" + file.name;
-    const { data, error } = storageUpload(file.data, file.mimetype, path);
-    console.log(data, error);
-    const publicURL = getUrl(path);
+    storageUpload(file.data, file.mimetype, path);
 
-    const code = await updateTable(publicURL);
+    const code = await updateTable(path);
     console.log(code, 123);
     res.send({ code: code });
   } catch (err) {
