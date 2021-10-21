@@ -8,10 +8,12 @@ router.post("/", async (req, res) => {
     const file = req.files.file;
     file.name = createFileName(file.name);
     const path = "public/" + file.name;
-    storageUpload(file.data, file.mimetype, path);
+    const { data, error } = storageUpload(file.data, file.mimetype, path);
+    console.log(data, error);
     const publicURL = getUrl(path);
-    
-    const code = updateTable(publicURL);
+
+    const code = await updateTable(publicURL);
+    console.log(code, 123);
     res.send({ url: publicURL });
   } catch (err) {
     console.log(err);

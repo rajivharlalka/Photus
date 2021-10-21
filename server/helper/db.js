@@ -1,10 +1,12 @@
 const { hash } = require("../utils/hash");
-const { pool } = require("../utils/pool");
+const { supabase } = require("../utils/supabase");
 
-function updateTable(long_url) {
+async function updateTable(long_url) {
   const code = hash(long_url);
-  const sql = "insert into url_links(code,url) values ($1,$2)";
-  
+  const { data, error } = await supabase
+    .from("links")
+    .insert([{ code: code, url: long_url }], { upsert: true });
+  return code;
 }
 
 module.exports = { updateTable };

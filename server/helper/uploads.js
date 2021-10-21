@@ -1,13 +1,11 @@
-const { createClient } = require("@supabase/supabase-js");
-const config = require("../utils/config");
-
-const supabase = createClient(config.SUPABASE_URL, config.ANON_KEY);
+const { supabase } = require("../utils/supabase");
 
 function storageUpload(buffer, mimetype, path) {
-  const { data } = supabase.storage.from("photos").upload(path, buffer, {
+  const { data, error } = supabase.storage.from("photos").upload(path, buffer, {
+    cacheControl:0,
     contentType: mimetype,
   });
-  return data;
+  return { data, error };
 }
 
 function getUrl(path) {
