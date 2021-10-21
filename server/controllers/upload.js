@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
 
     const code = await updateTable(publicURL);
     console.log(code, 123);
-    res.send({ url: publicURL });
+    res.send({ code: code });
   } catch (err) {
     console.log(err);
     res.statusCode(400).json({ error: err });

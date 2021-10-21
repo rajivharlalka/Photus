@@ -21,7 +21,7 @@ function App() {
       body: fd,
     });
     const url = await response.json();
-    setResponse(url.url);
+    setResponse(url.code);
   };
   return (
     <div className="App">
@@ -31,7 +31,7 @@ function App() {
           <input type="submit" value="submit" onClick={handleSubmit} />
         ) : null}
       </form>
-      {response ? <img src={response} /> : null}
+      {response ? <p>{response}</p> : null}
     </div>
   );
 }
