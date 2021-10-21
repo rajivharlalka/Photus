@@ -11,7 +11,6 @@ function storageUpload(buffer, mimetype, path) {
 
 async function downloadImage(code) {
   const path = await getPath(code);
-  console.log(path);
   const { data, error } = await supabase.storage.from("photos").download(path);
   return data;
 }
