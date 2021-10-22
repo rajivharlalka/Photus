@@ -12,8 +12,8 @@ touch .env
 add SUPABASE_URL,PUBLIC ANONYMOUS KEY and name of bucket for image upload
 ```
 
-[gif](./src/video.gif)
-[![gif]](./src/video.gif)
+
+![gif](./src/video.gif)
 
 ### Procastinated work
 
