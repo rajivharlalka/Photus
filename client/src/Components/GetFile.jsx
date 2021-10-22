@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Redirect, useParams } from "react-router";
 import styled from "styled-components";
 ///
 const Background = styled.div`
@@ -68,7 +68,11 @@ function GetFile() {
             src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e479bf72ydu3coh3k2j0iy92odmrxh5mx8nblnu02wb&rid=giphy.gif&ct=g"
             load={load}
           ></Loader>
-          <Image src={data.url} alt="" load={load} />
+          {data.url === "Cannot read property 'path' of undefined" ? (
+            <Redirect to="/404" />
+          ) : (
+            <Image src={data.url} alt="" load={load} />
+          )}
         </Card>
       </Container>
     </Background>
