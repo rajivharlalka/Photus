@@ -12,18 +12,31 @@ const Background = styled.div`
 `;
 
 const Container = styled.div`
-  max-width: 100vh;
+  max-width: 100vw;
+  @media (min-width: 984px) {
+    max-width: 50vw;
+  }
   margin: 0 auto;
 `;
 
 const Card = styled.div`
   background-color: white;
-  width: 100%;
-  margin-top: 20vh;
+
   border-radius: 20px;
+  padding: 8px;
+  width: ${(props) => (props.load ? "20%" : "100%")};
 `;
 
 const Image = styled.img`
+  display: ${(props) => (props.load ? "none" : "block")};
+  width: 100%;
+  height: 100%;
+
+  border-radius: 20px;
+  object-fit: cover;
+`;
+const Loader = styled.img`
+  display: ${(props) => (props.load ? "block" : "none")};
   width: 100%;
   border-radius: 20px;
   object-fit: cover;
@@ -33,7 +46,9 @@ const Image = styled.img`
 function GetFile() {
   const { code } = useParams();
   const [data, setData] = useState({});
+  const [load, setLoad] = useState(false);
   useEffect(() => {
+    setLoad(false);
     getData();
   }, []);
 
@@ -48,12 +63,12 @@ function GetFile() {
   return (
     <Background>
       <Container>
-        <Card>
-          <Image
-            style={{ objectFit: "cover", maxHeight: "50vh", maxWidth: "50vw" }}
-            src={data.url}
-            alt=""
-          />
+        <Card load={load}>
+          <Loader
+            src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif?cid=ecf05e479bf72ydu3coh3k2j0iy92odmrxh5mx8nblnu02wb&rid=giphy.gif&ct=g"
+            load={load}
+          ></Loader>
+          <Image src={data.url} alt="" load={load} />
         </Card>
       </Container>
     </Background>
