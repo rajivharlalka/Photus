@@ -8,6 +8,7 @@ const DATABASE_NAME = process.env.DATABASE_NAME;
 const DB_PORT = process.env.DB_PORT;
 const USER = process.env.USER;
 const PASSWORD = process.env.PASSWORD;
+const BUCKET = process.env.BUCKET;
 
 module.exports = {
   SUPABASE_URL,
@@ -18,4 +19,5 @@ module.exports = {
   DB_PORT,
   USER,
   PASSWORD,
+  BUCKET,
 };

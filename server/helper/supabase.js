@@ -9,10 +9,4 @@ function storageUpload(buffer, mimetype, path) {
   return { data, error };
 }
 
-async function downloadImage(code) {
-  const path = await getPath(code);
-  const { data, error } = await supabase.storage.from("photos").download(path);
-  return data;
-}
-
-module.exports = { storageUpload, downloadImage };
+module.exports = { storageUpload };

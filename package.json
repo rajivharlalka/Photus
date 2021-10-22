@@ -12,5 +12,10 @@
     "client": "cd client & yarn start",
     "server": "cd server & yarn start",
     "dev": "concurrently \"cd client && yarn start\" \" cd server && yarn start\""
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "react-router-dom": "^5.3.0",
+    "styled-components": "^5.3.3"
   }
 }
