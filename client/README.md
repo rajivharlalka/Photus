@@ -55,4 +55,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 ### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/cre
+This section has moved here: [https://facebo
