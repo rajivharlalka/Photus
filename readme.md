@@ -20,4 +20,4 @@ add SUPABASE_URL,PUBLIC ANONYMOUS KEY and name of bucket for image upload
 - Better frontend
 - multiple image upload
 - change to TypeScript
-- handle all the error msg's
+- handle all the error msg's.
